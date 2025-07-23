@@ -1,17 +1,18 @@
-package com.interview.challenge4;
+package com.interview.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * Alternative LoggingService without Lombok @Slf4j annotation
- * Use this if the main LoggingService has compilation issues
+ * Challenge 4: Logging Configuration
+ * 
+ * This service generates log messages to demonstrate the missing class name issue.
+ * When the logback configuration is fixed, class names should appear in logs.
  */
 @Service
-public class LoggingServiceAlternative {
-    
-    private static final Logger log = LoggerFactory.getLogger(LoggingServiceAlternative.class);
+public class LoggingService {
+    private static final Logger log = LoggerFactory.getLogger(LoggingService.class);
     
     public void performOperation(String operationName) {
         log.info("Starting operation: {}", operationName);

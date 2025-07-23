@@ -8,7 +8,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * SOLUTION: Add RequestContextHolder.clear() in the finally block
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestPropertySource(properties = "spring.datasource.url=jdbc:h2:mem:testdb")
 class RequestContextTest {
 
     @LocalServerPort

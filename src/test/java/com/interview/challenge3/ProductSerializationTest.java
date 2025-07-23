@@ -1,9 +1,9 @@
 package com.interview.challenge3;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.interview.model.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 
 import java.math.BigDecimal;
 
@@ -28,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * 4. Fix field naming to match expected JSON
  */
 @SpringBootTest
-@TestPropertySource(properties = "spring.datasource.url=jdbc:h2:mem:testdb")
 class ProductSerializationTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();

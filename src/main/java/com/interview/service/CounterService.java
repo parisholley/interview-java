@@ -1,4 +1,4 @@
-package com.interview.challenge1;
+package com.interview.service;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;

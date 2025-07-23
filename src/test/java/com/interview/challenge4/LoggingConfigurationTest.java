@@ -1,9 +1,9 @@
 package com.interview.challenge4;
 
+import com.interview.service.LoggingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 
 /**
  * Challenge 4: Logback Configuration Issue
@@ -22,7 +22,6 @@ import org.springframework.test.context.TestPropertySource;
  * DOCUMENTATION: https://logback.qos.ch/manual/layouts.html
  */
 @SpringBootTest
-@TestPropertySource(properties = "spring.datasource.url=jdbc:h2:mem:testdb")
 class LoggingConfigurationTest {
 
     @Autowired

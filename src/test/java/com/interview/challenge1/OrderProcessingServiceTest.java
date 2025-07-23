@@ -1,9 +1,9 @@
 package com.interview.challenge1;
 
+import com.interview.service.OrderProcessingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * SOLUTION: Change @Scope("singleton") to @Scope("prototype") in CounterService
  */
 @SpringBootTest
-@TestPropertySource(properties = "spring.datasource.url=jdbc:h2:mem:testdb")
 class OrderProcessingServiceTest {
 
     @Autowired

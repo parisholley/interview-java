@@ -1,4 +1,4 @@
-package com.interview.challenge2;
+package com.interview.util;
 
 /**
  * Request context information stored in ThreadLocal

@@ -6,7 +6,7 @@ This document contains the solutions to all challenges for interviewer reference
 
 **Problem**: `CounterService` is configured as singleton, causing state to be shared between tests.
 
-**Location**: `src/main/java/com/interview/challenge1/CounterService.java`
+**Location**: `src/main/java/com/interview/service/CounterService.java`
 
 **Solution**: Change the scope annotation from:
 ```java
@@ -30,7 +30,7 @@ to:
 
 **Problem**: `RequestContextFilter` doesn't clean up ThreadLocal values after request processing.
 
-**Location**: `src/main/java/com/interview/challenge2/RequestContextFilter.java`
+**Location**: `src/main/java/com/interview/filter/RequestContextFilter.java`
 
 **Solution**: Add cleanup in the finally block:
 ```java
@@ -54,7 +54,7 @@ try {
 
 **Problem**: `@JsonProperty` on fields conflicts with getter/setter names, causing JSON serialization/deserialization issues.
 
-**Location**: `src/main/java/com/interview/challenge3/Product.java`
+**Location**: `src/main/java/com/interview/model/Product.java`
 
 **Solution Option 1** (Recommended): Use `@JsonNaming` instead of individual `@JsonProperty`:
 ```java

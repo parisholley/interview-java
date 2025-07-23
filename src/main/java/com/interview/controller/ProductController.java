@@ -1,5 +1,6 @@
-package com.interview.challenge3;
+package com.interview.controller;
 
+import com.interview.model.Product;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;

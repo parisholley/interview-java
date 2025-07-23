@@ -1,4 +1,4 @@
-package com.interview.challenge3;
+package com.interview.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

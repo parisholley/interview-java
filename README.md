@@ -28,7 +28,7 @@ Each challenge represents a common real-world issue that developers encounter. T
 
 **What to investigate**:
 - Run the test and observe the failure
-- Look at the `CounterService` implementation
+- Look at the `CounterService` implementation in `src/main/java/com/interview/service/`
 - Understand why the counter state is being shared
 
 **Expected skill demonstration**: Understanding of Spring bean scopes and lifecycle

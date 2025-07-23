@@ -1,4 +1,4 @@
-package com.interview.challenge5;
+package com.interview.model;
 
 import jakarta.persistence.*;
 
