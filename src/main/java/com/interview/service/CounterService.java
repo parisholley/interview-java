@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * Actual: Counter values are being shared/reused unexpectedly
  */
 @Service
-@Scope("singleton") // BUG: This should be "prototype" for proper isolation
+@Scope("prototype") // FIXED: Changed from singleton to prototype for proper isolation
 public class CounterService {
     
     private int count = 0;

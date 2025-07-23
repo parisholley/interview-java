@@ -37,8 +37,8 @@ public class RequestContextFilter implements Filter {
         try {
             chain.doFilter(request, response);
         } finally {
-            // BUG: Missing cleanup! ThreadLocal values will leak to next request on same thread
-            // RequestContextHolder.clear(); // <-- This line is missing!
+            // FIXED: Added ThreadLocal cleanup to prevent memory leaks
+            RequestContextHolder.clear();
         }
     }
 }

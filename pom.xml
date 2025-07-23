@@ -55,14 +55,12 @@
             <scope>runtime</scope>
         </dependency>
         
-        <!-- Note: H2 dependency intentionally missing - candidate needs to add it -->
-        <!--
+        <!-- FIXED: Added H2 dependency for testing -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
-        -->
     </dependencies>
 
     <build>

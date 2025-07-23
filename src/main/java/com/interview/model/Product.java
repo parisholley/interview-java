@@ -1,5 +1,6 @@
 package com.interview.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
@@ -39,8 +40,12 @@ public class Product {
     // No-args constructor
     public Product() {}
     
-    // BUG: Missing @JsonCreator or proper constructor for deserialization
-    public Product(String productId, String productName, BigDecimal price, Boolean active) {
+    // FIXED: Added @JsonCreator for proper deserialization
+    @JsonCreator
+    public Product(@JsonProperty("product_id") String productId, 
+                   @JsonProperty("product_name") String productName,
+                   @JsonProperty("price") BigDecimal price, 
+                   @JsonProperty("is_active") Boolean active) {
         this.productId = productId;
         this.productName = productName;
         this.price = price;
