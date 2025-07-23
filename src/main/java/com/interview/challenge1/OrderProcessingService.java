@@ -1,0 +1,23 @@
+package com.interview.challenge1;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * Service that processes orders and assigns order numbers using CounterService
+ */
+@Service
+public class OrderProcessingService {
+    
+    @Autowired
+    private CounterService counterService;
+    
+    public String processOrder(String customerName) {
+        int orderNumber = counterService.getNextValue();
+        return String.format("Order #%d for customer: %s", orderNumber, customerName);
+    }
+    
+    public int getLastOrderNumber() {
+        return counterService.getCurrentValue();
+    }
+}
