@@ -1,39 +1,34 @@
 package com.interview.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
 /**
- * Service that processes orders and assigns order numbers using CounterService
- * FIXED: Using ApplicationContext to get fresh prototype instances
+ * Challenge 1: Request Scope Issue
+ * 
+ * This service processes orders and assigns sequential order numbers within each request.
+ * It should start numbering from 1 for each new request, but due to incorrect scoping,
+ * the counter persists across requests.
+ * 
+ * ISSUE: Service has wrong scope, causing shared state between requests
+ * SOLUTION: Change scope to "request" so each HTTP request gets a fresh instance
  */
 @Service
+@Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class OrderProcessingService {
     
     @Autowired
-    private ApplicationContext applicationContext;
-    
-    private CounterService currentCounterService;
+    private CounterService counterService;
     
     public String processOrder(String customerName) {
-        // Get a fresh prototype instance for each processing session
-        if (currentCounterService == null) {
-            currentCounterService = applicationContext.getBean(CounterService.class);
-        }
-        int orderNumber = currentCounterService.getNextValue();
+        int orderNumber = counterService.getNextValue();
         return String.format("Order #%d for customer: %s", orderNumber, customerName);
     }
     
     public int getLastOrderNumber() {
-        if (currentCounterService == null) {
-            currentCounterService = applicationContext.getBean(CounterService.class);
-        }
-        return currentCounterService.getCurrentValue();
-    }
-    
-    // Method to reset the counter service (useful for testing)
-    public void resetCounter() {
-        currentCounterService = null;
+        return counterService.getCurrentValue();
     }
 }

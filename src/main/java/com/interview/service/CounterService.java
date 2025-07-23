@@ -4,13 +4,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
- * Challenge 1: Spring Bean Scope Problem
+ * Challenge 1: Request-Scoped Counter Service
  * 
- * This service is intended to provide a counter that increments for each request.
- * However, there's a scope configuration issue causing unexpected behavior.
+ * This service provides sequential numbering within each HTTP request.
+ * Each request-scoped OrderProcessingService should get its own fresh counter.
  * 
- * Expected: Each test method should get independent counter instances
- * Actual: Counter values are being shared/reused unexpectedly
+ * With prototype scope: Each @Autowired injection gets a new instance
+ * With singleton scope: All injections share the same instance (wrong for this use case)
  */
 @Service
 @Scope("prototype") // FIXED: Changed from singleton to prototype for proper isolation
