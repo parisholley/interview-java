@@ -1,4 +1,4 @@
-# Challenge 5: Database Configuration for Tests
+# Challenge 1: Database Configuration for Tests
 # FIXED: Complete H2 configuration for testing
 
 spring:

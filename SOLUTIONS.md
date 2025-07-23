@@ -4,7 +4,56 @@
 
 This document contains the solutions to all challenges for interviewer reference.
 
-## Challenge 1: Spring Bean Scope Issues
+## Challenge 1: Database Configuration Issues
+
+**Problem**: Tests fail because the application is trying to connect to a MySQL database instead of using an in-memory H2 database for testing.
+
+**Solutions Required**:
+
+1. **Add H2 dependency to `pom.xml`**:
+```xml
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>test</scope>
+</dependency>
+```
+
+2. **Configure H2 in `src/test/resources/application-test.yml`**:
+```yaml
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+    
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    com.interview: DEBUG
+    org.springframework.web: DEBUG
+```
+
+**Evaluation Points**:
+- ✅ Adds correct H2 dependency with test scope
+- ✅ Configures H2 datasource properly
+- ✅ Sets correct JPA/Hibernate properties for H2
+- ✅ Tests run successfully after changes
+- ⭐ **Bonus**: Explains difference between test and production database setup
+
+---
+
+## Challenge 2: Spring Bean Scope Issues
 
 **Problem**: `CounterService` is configured as singleton, causing state to be shared between tests.
 
@@ -28,7 +77,7 @@ to:
 
 ---
 
-## Challenge 2: ThreadLocal Memory Leaks
+## Challenge 3: ThreadLocal Memory Leaks
 
 **Problem**: `RequestContextFilter` doesn't clean up ThreadLocal values after request processing.
 
@@ -52,7 +101,7 @@ try {
 
 ---
 
-## Challenge 3: JSON Serialization Issues
+## Challenge 4: JSON Serialization Issues
 
 **Problem**: `@JsonProperty` on fields conflicts with getter/setter names, causing JSON serialization/deserialization issues.
 
@@ -114,7 +163,7 @@ public class Product {
 
 ---
 
-## Challenge 4: Logback Configuration
+## Challenge 5: Logback Configuration
 
 **Problem**: Log pattern missing class name information.
 
@@ -137,65 +186,6 @@ Apply this change to both CONSOLE and FILE appenders.
 - ✅ Researches documentation or knows pattern syntax
 - ✅ Updates both appenders consistently
 - ⭐ **Bonus**: Explains the `{36}` parameter (class name truncation)
-
----
-
-## Challenge 5: Database Testing Setup
-
-**Problem**: H2 database dependency and configuration missing for tests.
-
-**Solutions Required**:
-
-1. **Add H2 dependency to `pom.xml`**:
-```xml
-<dependency>
-    <groupId>com.h2database</groupId>
-    <artifactId>h2</artifactId>
-    <scope>test</scope>
-</dependency>
-```
-
-2. **Configure H2 in `src/test/resources/application-test.yml`**:
-```yaml
-spring:
-  profiles:
-    active: test
-    
-  datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: 
-    
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
-    database-platform: org.hibernate.dialect.H2Dialect
-    
-  h2:
-    console:
-      enabled: true
-
-logging:
-  level:
-    com.interview: DEBUG
-    org.springframework.web: DEBUG
-```
-
-3. **Optional**: Create `src/test/resources/data.sql` for test data:
-```sql
-INSERT INTO users (username, email, full_name, created_at, is_active) 
-VALUES ('testuser', 'test@example.com', 'Test User', CURRENT_TIMESTAMP, true);
-```
-
-**Evaluation Points**:
-- ✅ Adds correct H2 dependency with test scope
-- ✅ Configures H2 datasource properly
-- ✅ Sets correct JPA/Hibernate properties for H2
-- ✅ Tests run successfully after changes
-- ⭐ **Bonus**: Creates SQL scripts for test data
-- ⭐ **Bonus**: Explains difference between test and production database setup
 
 ---
 

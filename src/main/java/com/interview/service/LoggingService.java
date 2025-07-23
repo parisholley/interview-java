@@ -5,10 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * Challenge 4: Logging Configuration
- * 
- * This service generates log messages to demonstrate the missing class name issue.
- * When the logback configuration is fixed, class names should appear in logs.
+ * Service that performs various operations with logging.
  */
 @Service
 public class LoggingService {

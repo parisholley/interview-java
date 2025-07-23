@@ -41,7 +41,7 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
         
-        <!-- Jackson for JSON serialization (should be included in spring-boot-starter-web) -->
+        <!-- Jackson for JSON serialization -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>

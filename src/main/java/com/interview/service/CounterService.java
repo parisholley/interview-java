@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
- * Challenge 1: Request-Scoped Counter Service
+ * Challenge 2: Request-Scoped Counter Service (formerly Challenge 1)
  * 
  * This service provides sequential numbering within each HTTP request.
  * Each request-scoped OrderProcessingService should get its own fresh counter.

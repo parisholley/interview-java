@@ -2,26 +2,18 @@ package com.interview.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.math.BigDecimal;
 
 /**
- * Challenge 3: Serialization/Deserialization Issues
- * 
- * This class has annotation conflicts that cause JSON serialization/deserialization 
- * to fail or produce unexpected results.
+ * Product model class for JSON serialization/deserialization.
  * 
  * Expected JSON format:
  * {
  *   "product_id": "123",
- *   "product_name": "Widget",
+ *   "product_name": "Widget", 
  *   "price": 29.99,
  *   "is_active": true
  * }
- * 
- * BUG: @JsonProperty on fields conflicts with getter/setter names
- * BUG: Missing @JsonCreator for deserialization
- * BUG: Field name 'active' doesn't match expected JSON property 'is_active'
  */
 public class Product {
     
@@ -33,9 +25,8 @@ public class Product {
     
     private BigDecimal price;
     
-    // BUG: Field name doesn't match expected JSON property name
     @JsonProperty("is_active")
-    private Boolean active;  // Should be 'isActive' or use @JsonProperty on getter/setter
+    private Boolean active;
     
     // No-args constructor
     public Product() {}
@@ -51,8 +42,6 @@ public class Product {
         this.price = price;
         this.active = active;
     }
-    
-    // Getters and setters - these names conflict with @JsonProperty field annotations
     public String getProductId() {
         return productId;
     }

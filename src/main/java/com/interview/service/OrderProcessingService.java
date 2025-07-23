@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 /**
- * Challenge 1: Request Scope Issue
+ * Challenge 2: Request Scope Issue (formerly Challenge 1)
  * 
  * This service processes orders and assigns sequential order numbers within each request.
  * It should start numbering from 1 for each new request, but due to incorrect scoping,

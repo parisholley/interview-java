@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     
-    <!-- Challenge 4: Logback Configuration Issue -->
-    <!-- 
-    The log pattern below is missing the calling class information.
-    Candidate needs to look up Logback documentation to find the correct
-    pattern to add class name to the log output.
-    
-    Missing pattern: %logger{36} or %c{36} for class name
-    Documentation: https://logback.qos.ch/manual/layouts.html
-    -->
+    <!-- Application logging configuration -->
     
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

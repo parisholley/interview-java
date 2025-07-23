@@ -1,4 +1,4 @@
-package com.interview.challenge2;
+package com.interview.challenge3;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,14 +13,9 @@ import org.springframework.test.context.ActiveProfiles;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Challenge 2: ThreadLocal Memory Leak Test
+ * Challenge 3: Request Context Test
  * 
- * This test demonstrates the ThreadLocal cleanup issue in RequestContextFilter.
- * When using the same thread (common in test environments), context from previous
- * requests can leak into subsequent requests.
- * 
- * ISSUE: RequestContextFilter doesn't call RequestContextHolder.clear()
- * SOLUTION: Add RequestContextHolder.clear() in the finally block
+ * Tests request context isolation between HTTP requests.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -32,7 +27,7 @@ class RequestContextTest {
     private final TestRestTemplate restTemplate = new TestRestTemplate();
 
     @Test
-    void testThreadLocalCleanup() {
+    void testRequestContextIsolation() {
         String baseUrl = "http://localhost:" + port;
 
         // First request with user context
@@ -53,7 +48,6 @@ class RequestContextTest {
         assertTrue(response1.getBody().contains("session456"));
 
         // Second request WITHOUT user context headers
-        // This should show "No context" but might show leaked context from first request
         HttpHeaders headers2 = new HttpHeaders();
         HttpEntity<?> entity2 = new HttpEntity<>(headers2);
 
@@ -65,15 +59,11 @@ class RequestContextTest {
         );
 
         assertEquals(200, response2.getStatusCode().value());
-        
-        // This assertion might FAIL due to ThreadLocal leakage
-        // Expected: "No context"
-        // Actual: might contain "user123" and "session456" from previous request
         assertEquals("No context", response2.getBody());
     }
 
     @Test
-    void testMultipleRequestsWithDifferentContexts() {
+    void testConcurrentRequestContexts() {
         String baseUrl = "http://localhost:" + port;
 
         // Request 1
@@ -105,7 +95,6 @@ class RequestContextTest {
                 String.class
         );
 
-        // This should contain bob's info, but might contain alice's due to ThreadLocal leak
         assertTrue(response2.getBody().contains("bob"));
         assertTrue(response2.getBody().contains("sess-bob"));
         assertFalse(response2.getBody().contains("alice"));
