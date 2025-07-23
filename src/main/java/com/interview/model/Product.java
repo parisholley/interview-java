@@ -1,11 +1,18 @@
 package com.interview.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.math.BigDecimal;
 
 /**
- * Product model for the application.
+ * Product model class for JSON serialization/deserialization.
+ * 
+ * Expected JSON format:
+ * {
+ *   "product_id": "123",
+ *   "product_name": "Widget", 
+ *   "price": 29.99,
+ *   "is_active": true
+ * }
  */
 public class Product {
     
@@ -20,8 +27,7 @@ public class Product {
     @JsonProperty("is_active")
     private Boolean active;
     
-    public Product() {}
-    
+    // public Product() {}
     public Product(String productId, String productName, BigDecimal price, Boolean active) {
         this.productId = productId;
         this.productName = productName;

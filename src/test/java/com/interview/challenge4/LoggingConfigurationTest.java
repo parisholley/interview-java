@@ -4,22 +4,23 @@ import com.interview.service.LoggingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 /**
  * Challenge 4: Logging Configuration Test
  * 
  * This test generates log messages. Check the console output - 
- * the log format seems to be missing some information that would
- * be helpful for debugging.
+ * the log format seems to be missing class information that could help with debugging.
  */
 @SpringBootTest
+@ActiveProfiles("test")
 class LoggingConfigurationTest {
 
     @Autowired
     private LoggingService loggingService;
 
     @Test
-    void testLoggingOutput() {
+    void testApplicationLogging() {
         loggingService.performOperation("test-operation");
         loggingService.performOperation("another-operation");
         loggingService.performOperation("error");
@@ -27,7 +28,7 @@ class LoggingConfigurationTest {
     }
 
     @Test
-    void testErrorLogging() {
+    void testExceptionHandling() {
         loggingService.performOperation("error");
     }
 }

@@ -4,14 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Challenge 1: Request Scope Issue
- * 
- * This service processes orders and assigns sequential order numbers within each request.
- * It should start numbering from 1 for each new request, but due to incorrect scoping,
- * the counter persists across requests.
- * 
- * ISSUE: Service has wrong scope, causing shared state between requests
- * SOLUTION: Change scope to "request" so each HTTP request gets a fresh instance
+ * Service that processes orders and assigns sequential order numbers.
+ * Order numbering should start from 1 for each new request.
  */
 @Service
 public class OrderProcessingService {

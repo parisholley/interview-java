@@ -5,21 +5,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Challenge 1: Order Processing Request Scope Test
+ * Challenge 1: Order Processing Test
  * 
- * This test demonstrates that order numbering should reset to 1 for each new HTTP request,
- * but due to incorrect bean scoping, the counter persists across requests.
- * 
- * The tests use actual HTTP requests to simulate real client behavior.
- * Each request should start order numbering from 1, but currently they continue incrementing.
+ * Tests order processing functionality through HTTP requests.
+ * Order numbering should start from 1 for each new request.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 class OrderProcessingServiceTest {
 
     @LocalServerPort
@@ -29,7 +28,7 @@ class OrderProcessingServiceTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    void testFirstRequestShouldStartOrderNumberingAt1() {
+    void testSingleOrderProcessing() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("customerName", "Alice");
         
@@ -43,7 +42,7 @@ class OrderProcessingServiceTest {
     }
 
     @Test
-    void testSecondRequestShouldAlsoStartAt1() {
+    void testMultipleIndividualOrders() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("customerName", "Bob");
         
@@ -53,13 +52,12 @@ class OrderProcessingServiceTest {
             String.class
         );
         
-        // This should be "Order #1 for customer: Bob" but will likely be a higher number
-        // due to the scoping issue
+        // Expecting fresh order numbering for new request
         assertEquals("Order #1 for customer: Bob", response);
     }
 
     @Test
-    void testMultipleOrdersInSameRequestShouldIncrement() {
+    void testBatchOrderProcessing() {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("customers", "Charlie");
         params.add("customers", "Diana");
@@ -71,7 +69,7 @@ class OrderProcessingServiceTest {
             String.class
         );
         
-        // Within the same request, orders should increment: 1, 2, 3
+        // Expecting sequential numbering within the same batch request
         assertEquals("Order #1 for customer: Charlie; Order #2 for customer: Diana; Order #3 for customer: Eve", response);
     }
 }

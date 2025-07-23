@@ -8,16 +8,17 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Challenge 2: Request Context Test
  * 
- * This test is failing. Request context information appears to be
- * leaking between HTTP requests in some cases.
+ * Tests request context isolation between HTTP requests.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 class RequestContextTest {
 
     @LocalServerPort
@@ -26,7 +27,7 @@ class RequestContextTest {
     private final TestRestTemplate restTemplate = new TestRestTemplate();
 
     @Test
-    void testThreadLocalCleanup() {
+    void testRequestContextIsolation() {
         String baseUrl = "http://localhost:" + port;
 
         // First request with user context
@@ -62,7 +63,7 @@ class RequestContextTest {
     }
 
     @Test
-    void testMultipleRequestsWithDifferentContexts() {
+    void testConcurrentRequestContexts() {
         String baseUrl = "http://localhost:" + port;
 
         // Request 1

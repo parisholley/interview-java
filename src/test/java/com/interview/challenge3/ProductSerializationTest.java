@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interview.model.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
 
@@ -13,16 +14,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Challenge 3: Product Serialization Test
  * 
- * This test is failing. The JSON serialization and deserialization
- * is not working as expected for the Product class.
+ * Tests JSON serialization and deserialization of Product objects.
  */
 @SpringBootTest
+@ActiveProfiles("test")
 class ProductSerializationTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    void testProductSerialization() throws Exception {
+    void testProductToJson() throws Exception {
         Product product = new Product("PROD-123", "Test Widget", new BigDecimal("29.99"), true);
         
         String json = objectMapper.writeValueAsString(product);
@@ -35,7 +36,7 @@ class ProductSerializationTest {
     }
 
     @Test
-    void testProductDeserialization() throws Exception {
+    void testJsonToProduct() throws Exception {
         String json = """
                 {
                     "product_id": "PROD-456",
@@ -54,7 +55,7 @@ class ProductSerializationTest {
     }
 
     @Test
-    void testRoundTripSerialization() throws Exception {
+    void testProductJsonConversion() throws Exception {
         Product original = new Product("PROD-789", "Round Trip Widget", new BigDecimal("15.50"), true);
         
         String json = objectMapper.writeValueAsString(original);

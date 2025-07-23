@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 /**
  * Counter service that maintains order numbers.
  * Each instance starts counting from 0 and increments with each call.
- * 
- * This service is prototype-scoped, meaning each injection point gets a fresh instance.
  */
 @Service
 @Scope("prototype")
