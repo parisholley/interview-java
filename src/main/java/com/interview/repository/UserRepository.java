@@ -10,16 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Challenge 5: Database Testing Challenge
- * 
- * This repository is configured for MySQL in production.
- * The challenge is to write tests using H2 in-memory database.
- * 
- * Candidate needs to:
- * 1. Add H2 dependency to pom.xml
- * 2. Configure test profile to use H2 instead of MySQL  
- * 3. Create SQL script to set up test data
- * 4. Write integration tests for the repository methods
+ * Repository for User entity operations.
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

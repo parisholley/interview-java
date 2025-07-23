@@ -11,21 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Challenge 3: JSON Serialization/Deserialization Issues
+ * Challenge 3: Product Serialization Test
  * 
- * This test demonstrates the problems with Lombok @Data annotation conflicting
- * with Jackson @JsonProperty annotations.
- * 
- * ISSUES:
- * 1. @Data generates getters/setters that don't match @JsonProperty names
- * 2. Missing @JsonCreator for deserialization
- * 3. Field name 'active' vs expected JSON property 'is_active'
- * 
- * SOLUTIONS:
- * 1. Use @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class) instead of individual @JsonProperty
- * 2. Or use @JsonProperty on getters/setters instead of fields
- * 3. Add @JsonCreator constructor
- * 4. Fix field naming to match expected JSON
+ * This test is failing. The JSON serialization and deserialization
+ * is not working as expected for the Product class.
  */
 @SpringBootTest
 class ProductSerializationTest {
@@ -39,7 +28,6 @@ class ProductSerializationTest {
         String json = objectMapper.writeValueAsString(product);
         System.out.println("Serialized JSON: " + json);
         
-        // These assertions will FAIL due to annotation conflicts
         assertTrue(json.contains("\"product_id\":\"PROD-123\""));
         assertTrue(json.contains("\"product_name\":\"Test Widget\""));
         assertTrue(json.contains("\"price\":29.99"));
@@ -57,7 +45,6 @@ class ProductSerializationTest {
                 }
                 """;
         
-        // This will FAIL due to missing @JsonCreator and annotation conflicts
         Product product = objectMapper.readValue(json, Product.class);
         
         assertEquals("PROD-456", product.getProductId());
@@ -70,13 +57,9 @@ class ProductSerializationTest {
     void testRoundTripSerialization() throws Exception {
         Product original = new Product("PROD-789", "Round Trip Widget", new BigDecimal("15.50"), true);
         
-        // Serialize to JSON
         String json = objectMapper.writeValueAsString(original);
-        
-        // Deserialize back to object
         Product deserialized = objectMapper.readValue(json, Product.class);
         
-        // These should be equal but will FAIL due to serialization issues
         assertEquals(original.getProductId(), deserialized.getProductId());
         assertEquals(original.getProductName(), deserialized.getProductName());
         assertEquals(original.getPrice(), deserialized.getPrice());

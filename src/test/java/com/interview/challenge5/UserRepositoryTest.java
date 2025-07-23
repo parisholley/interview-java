@@ -13,33 +13,11 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Challenge 5: Database Testing with H2
+ * Challenge 5: User Repository Test
  * 
- * This test is currently incomplete and will not run successfully.
- * The candidate needs to:
- * 
- * 1. Add H2 dependency to pom.xml:
- *    <dependency>
- *        <groupId>com.h2database</groupId>
- *        <artifactId>h2</artifactId>
- *        <scope>test</scope>
- *    </dependency>
- * 
- * 2. Configure H2 in application-test.yml:
- *    spring:
- *      datasource:
- *        url: jdbc:h2:mem:testdb
- *        driver-class-name: org.h2.Driver
- *        username: sa
- *        password: 
- *      jpa:
- *        hibernate:
- *          ddl-auto: create-drop
- *        database-platform: org.hibernate.dialect.H2Dialect
- * 
- * 3. Create schema.sql or data.sql in test/resources to set up test data
- * 
- * 4. Run the tests and verify they pass with H2 database
+ * This test will not run successfully due to database configuration issues.
+ * The main application is configured for MySQL, but the tests need to run
+ * with a different database setup.
  */
 @DataJpaTest
 @ActiveProfiles("test")
@@ -50,7 +28,6 @@ class UserRepositoryTest {
 
     @Test
     void testFindByUsername() {
-        // This test will fail until H2 is properly configured
         User user = new User("testuser", "test@example.com", "Test User");
         userRepository.save(user);
 

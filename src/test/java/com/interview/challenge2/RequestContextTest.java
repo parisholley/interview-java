@@ -12,14 +12,10 @@ import org.springframework.http.ResponseEntity;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Challenge 2: ThreadLocal Memory Leak Test
+ * Challenge 2: Request Context Test
  * 
- * This test demonstrates the ThreadLocal cleanup issue in RequestContextFilter.
- * When using the same thread (common in test environments), context from previous
- * requests can leak into subsequent requests.
- * 
- * ISSUE: RequestContextFilter doesn't call RequestContextHolder.clear()
- * SOLUTION: Add RequestContextHolder.clear() in the finally block
+ * This test is failing. Request context information appears to be
+ * leaking between HTTP requests in some cases.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RequestContextTest {
@@ -51,7 +47,6 @@ class RequestContextTest {
         assertTrue(response1.getBody().contains("session456"));
 
         // Second request WITHOUT user context headers
-        // This should show "No context" but might show leaked context from first request
         HttpHeaders headers2 = new HttpHeaders();
         HttpEntity<?> entity2 = new HttpEntity<>(headers2);
 
@@ -63,10 +58,6 @@ class RequestContextTest {
         );
 
         assertEquals(200, response2.getStatusCode().value());
-        
-        // This assertion might FAIL due to ThreadLocal leakage
-        // Expected: "No context"
-        // Actual: might contain "user123" and "session456" from previous request
         assertEquals("No context", response2.getBody());
     }
 
@@ -103,7 +94,6 @@ class RequestContextTest {
                 String.class
         );
 
-        // This should contain bob's info, but might contain alice's due to ThreadLocal leak
         assertTrue(response2.getBody().contains("bob"));
         assertTrue(response2.getBody().contains("sess-bob"));
         assertFalse(response2.getBody().contains("alice"));
