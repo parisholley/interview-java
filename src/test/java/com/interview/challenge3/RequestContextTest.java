@@ -1,4 +1,4 @@
-package com.interview.challenge2;
+package com.interview.challenge3;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Challenge 2: Request Context Test
+ * Challenge 3: Request Context Test
  * 
  * Tests request context isolation between HTTP requests.
  */

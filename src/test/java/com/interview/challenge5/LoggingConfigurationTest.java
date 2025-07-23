@@ -1,4 +1,4 @@
-package com.interview.challenge4;
+package com.interview.challenge5;
 
 import com.interview.service.LoggingService;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 /**
- * Challenge 4: Logging Configuration Test
+ * Challenge 5: Logging Configuration Test
  * 
  * This test generates log messages. Check the console output - 
  * the log format seems to be missing class information that could help with debugging.

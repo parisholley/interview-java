@@ -1,4 +1,4 @@
-package com.interview.challenge3;
+package com.interview.challenge4;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interview.model.Product;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Challenge 3: Product Serialization Test
+ * Challenge 4: Product Serialization Test
  * 
  * Tests JSON serialization and deserialization of Product objects.
  */
