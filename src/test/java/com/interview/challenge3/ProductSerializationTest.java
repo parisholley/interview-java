@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interview.model.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
 
@@ -28,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * 4. Fix field naming to match expected JSON
  */
 @SpringBootTest
+@ActiveProfiles("test")
 class ProductSerializationTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();

@@ -17,7 +17,7 @@ import java.io.IOException;
  * 
  * BUG: ThreadLocal values are not being cleared after request processing
  */
-@Component
+@Component("interviewRequestContextFilter")
 public class RequestContextFilter implements Filter {
 
     @Override

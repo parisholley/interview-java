@@ -28,6 +28,9 @@ public class UserController {
     @GetMapping("/context")
     public String getRequestContext() {
         RequestContext context = RequestContextHolder.getContext();
-        return context != null ? context.toString() : "No context";
+        if (context == null || (context.getUserId() == null && context.getSessionId() == null)) {
+            return "No context";
+        }
+        return context.toString();
     }
 }

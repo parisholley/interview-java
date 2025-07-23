@@ -8,6 +8,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * SOLUTION: Add RequestContextHolder.clear() in the finally block
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 class RequestContextTest {
 
     @LocalServerPort
