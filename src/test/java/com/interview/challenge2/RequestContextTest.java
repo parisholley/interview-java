@@ -1,4 +1,4 @@
-package com.interview.challenge3;
+package com.interview.challenge2;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,12 +13,12 @@ import org.springframework.test.context.ActiveProfiles;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Challenge 3: Request Context Test
+ * Challenge 2: Request Context Test
  * 
  * Tests request context isolation between HTTP requests.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@ActiveProfiles("unit")
 class RequestContextTest {
 
     @LocalServerPort
