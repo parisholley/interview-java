@@ -1,4 +1,4 @@
-package com.interview.challenge2;
+package com.interview.challenge1;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +12,13 @@ import org.springframework.util.MultiValueMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Challenge 2: Order Processing Test
+ * Challenge 1: Order Processing Test
  * 
  * Tests order processing functionality through HTTP requests.
  * Order numbering should start from 1 for each new request.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@ActiveProfiles("unit")
 class OrderProcessingServiceTest {
 
     @LocalServerPort
