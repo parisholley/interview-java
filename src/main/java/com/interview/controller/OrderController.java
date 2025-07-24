@@ -4,13 +4,6 @@ import com.interview.service.OrderProcessingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Challenge 1: Order Controller
- * 
- * This controller processes orders via HTTP endpoints.
- * The order numbering should reset to 1 for each new HTTP request,
- * but due to incorrect bean scoping, numbers continue incrementing across requests.
- */
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
