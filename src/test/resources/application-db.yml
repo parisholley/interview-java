@@ -1,4 +1,0 @@
-logging:
-  level:
-    com.interview: DEBUG
-    org.springframework.web: DEBUG
